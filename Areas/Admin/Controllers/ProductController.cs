@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -59,7 +60,9 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (file != null)
                 {
+                    // Image File name with same Extension
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    // Saving the Image
                     string productPath = Path.Combine(wwwRootPath, @"images/product");
                     if(!string.IsNullOrEmpty(productVM.Product.ImageUrl)) 
                     {
@@ -71,6 +74,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                             
                         }
                     }
+                    // creating a new product with image
                     using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);

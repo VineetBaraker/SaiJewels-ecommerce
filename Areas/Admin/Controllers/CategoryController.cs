@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles =SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -60,7 +61,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
         [HttpPost]
         public IActionResult Edit(Category obj)
-        {
+              {
 
             if (ModelState.IsValid)
             {
